@@ -1,0 +1,56 @@
+html {
+	width: 100% !important;
+	height: 100 !important;
+	clip: auto;
+	position: fixed;
+	overflow: hidden;
+}
+
+body {
+	width: 100% !important;
+	height: 100 !important;
+	overflow: hidden !important;
+	background-color:#8FA9CC !important;
+}
+
+.full-area {
+	width: 96%;
+	height: 100%;
+}
+
+.image-container {
+	width: 145px;
+	height: 38px;
+	overflow: hidden;
+	position: relative;
+	cursor: pointer;
+}
+
+.image-inner-container {
+    position: absolute;
+}
+
+.overlay {
+	position: absolute;
+	text-align: left;
+	color: rgb(0,0,0) !important;
+	width: 100%;
+	margin: 12px 20px;
+}
+
+#results_popup {
+	position: fixed;
+	z-index: 1;
+	bottom: 4%;
+	right: 18%;
+	width: 50%;
+	text-align: center;
+}
+
+#delete_modal h4 {
+	text-align: center !important;
+}
+
+#delete_modal .modal-body {
+	text-align: center !important;
+}

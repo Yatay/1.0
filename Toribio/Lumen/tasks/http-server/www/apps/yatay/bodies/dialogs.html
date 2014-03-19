@@ -1,0 +1,84 @@
+<!-- Code Editor Modal -->
+<div id="code_modal" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="Yatay.Common.closeEditor()">×</button>
+		<h3 id="code_label"/>
+	</div>
+	<div class="modal-body code-body">
+		<ul id="modal_tabs" class="nav nav-tabs">
+		</ul>
+		<textarea id="code_editable" class="full-area"/>
+	</div>
+	<div class="modal-footer">
+		<button id="btn_save2" class="btn btn-primary pull-left" onclick="Yatay.Common.saveEditedCode()" />
+		<button id="btn_run2" class="btn btn-primary" onclick="Yatay.Common.runEditedTasks()"/>
+	</div>
+</div>
+<!-- File loader Modal -->
+<div id="loader_modal" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="loader_label"/>
+	</div>
+	<div class="modal-body">
+		<div id="loadMainWindow">
+			<h4 id="txt_local_input"/> 
+			<input id="file_input" class="btn-default" type="file" accept=".xml" />
+			<hr></hr>
+			<h4 id="txt_remote_input" />
+			<p><button id="btn_remote_loader" type="button" class="btn btn-default popover-test" onclick="Yatay.Common.loadBxs()"></button></p>
+		</div>
+		<table class="table table-striped table-hover">
+			<tbody id="remote_proj"></tbody>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button id="btn_openfile" class="btn btn-primary" onclick="Yatay.Common.fromXml()"/>
+	</div>
+</div>
+<!-- Project manager Modal -->
+<div id="projmaneger_modal" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<h3 id="projmanager_label"/>
+	</div>
+	<div class="modal-body">
+		<div id="loadMainWindow">
+			<h4 id="txt_new_proj"/> 
+			<p><input id="proj_input" type="text" /></p>			
+			<hr></hr>
+			<h4 id="txt_remote_proj"/>
+			<p><button id="btn_remote_proj" type="button" class="btn btn-default popover-test" onclick="Yatay.Common.loadProj()"></button></p>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button id="btn_openproj" class="btn btn-primary" onclick="Yatay.Common.projectSaver()"/>
+	</div>
+</div>
+<!-- Delete Modal -->
+<div id="delete_modal" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h4 id="delete_label"/>
+	</div>
+	<div class="modal-body">
+		<button id="btn_delete_workspace" class="btn btn-primary" onclick="Yatay.discard('Workspace')" style="left: 15%"/>
+		<button id="btn_delete_all" class="btn btn-primary" onclick="Yatay.discard('All')" style="right: 15%"/>		
+	</div>
+	<div class="modal-footer" style="display:none"></div>
+</div>
+<!-- Edition error Modal -->
+<div id="edition_error_modal" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<h4 id="edition_error_title"/>
+	</div>
+	<div class="modal-body" style="min-height: 0px !important">
+		<label id="edition_error_msg" style="font-size:16px" />
+		<br>
+		<button id="btn_error_detail" type="button" class="btn btn-default" onclick="$('#edition_error_detail').show();$('#btn_error_detail').hide();"></button>
+		<label id="edition_error_detail" style="display:none" />
+	</div>
+	<div class="modal-footer">
+		<button id="btn_run2" class="btn btn-primary" onclick="Yatay.Common.closeEditionError();">Ok</button>
+	</div>
+</div>
+

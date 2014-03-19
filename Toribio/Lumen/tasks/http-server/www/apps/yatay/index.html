@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<meta name="google" value="notranslate">
+	<meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0">
+	<title>Yatay</title>
+  	<!-- Stylesheets for third-party libraries -->
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css" type="text/css">
+	<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstro.min.css" type="text/css">
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap-multiselect.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="../common.css"/>
+	<!-- Third-party libraries -->
+	<script type="text/javascript" src="lib/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="lib/jquery-ui-1.10.4.custom.min.js"></script>	
+	<script type="text/javascript" src="lib/yepnope.1.5.4-min.js"></script>
+	<script type="text/javascript" src="lib/modernizr-2.5.3.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap/js/bootstro.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap/js/bootstrap-multiselect.js"></script>
+	<script type="text/javascript" src="lib/codemirror/codemirror.js"></script>
+	<script type="text/javascript" src="lib/file-saver.js"></script>
+	<script type="text/javascript" src="../_soy/soyutils.js"></script>
+	<script type="text/javascript" src="../common.js"></script>	
+	<!-- Stylesheets for Yatay libraries -->
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<!-- Yatay implementation libraries -->
+	<script type="text/javascript" src="js/yatay.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+		Modernizr.load({
+			test: Modernizr.mq('only all and (max-device-width:480px)'),	
+			yep: ["css/mobile.css", "js/mobile.js"],
+			nope: ["css/tablet.css", "js/tablet.js"]
+		});
+		$(window).load(function() {	
+			setTimeout(function() {	
+				//Show Project Manager Modal (when the page is loaded)
+				try {Yatay.Common.projectChecker();} catch(e) {Yatay.Common.projectChecker();}
+			}, 1100);
+		});
+	</script>
+</head>
+<body>
+	<!-- Main navbar menu (device dependent) -->
+	<div id="main_menu"></div> 
+	<!-- Dialogs (loaded from ./bodies) -->
+	<div id="dialogs"></div>
+	<!-- Blockly starter -->
+	<script type="text/javascript">
+		$.ajax({
+			url: "/index.html",
+			type: "POST",
+			data: { id:'blocks', lang:BlocklyApps.LANG },
+			async: false,
+			success: function(content) {
+				var data = JSON.parse(content);
+				(Yatay.not_available_sensors = data.unavailable.split(",")).pop();	
+				(Yatay.missing_sensors = data.missing.split(",")).pop();
+				document.write(codepage.start(data.blocks, null, {lang: BlocklyApps.LANG, langSrc: BlocklyApps.languagePack()}));
+			},
+			error:function() {
+				document.write(codepage.start('', null, {lang: BlocklyApps.LANG, langSrc: BlocklyApps.languagePack()}));
+			}
+		});
+	</script>
+	<!-- Behaviours ready popup -->
+	<div id="behaviours_popup" div class="alert alert-info" style="display:none;"></div>
+	<!-- Robot results popup -->
+	<div id="results_popup" class="alert alert-info alert-dismissable" style="display:none;">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<p id="result_sensor"></p><p id="result_console"></p>	
+	</div>
+	<!-- Download? -->
+	<div id="download"></div>
+</body>
+</html>

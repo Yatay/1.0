@@ -1,0 +1,60 @@
+<!-- Menu Navbar -->
+<div id="menu_navbar" class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">	
+			<ul class="nav navbar-nav">
+				<li><a id="btn_back" onclick="Yatay.Common.goBack()" style="color:rgb(153,153,153); display: none;">
+					<i class="fa fa-arrow-up fa-2x"></i>
+				</a></li>
+				<li class="dropdown">
+					<a id="btn_more" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:rgb(255,255,120);">
+						<i class="fa fa-bars fa-2x"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a id="btn_load" onclick="Yatay.Common.openFileChooser()" style="color:rgb(255,70,70);">
+							<i class="fa fa-folder-open-o fa-2x"></i>
+						</a></li>	
+						<li><a id="btn_save" onclick="Yatay.Common.toXml()" style="color:rgb(70,70,255)">
+							<i class="fa fa-save fa-2x"></i>
+						</a></li>	
+						<li><a id="btn_robotest" onclick="Yatay.Common.robotest()" style="color:rgb(160,70,255);">
+							<i class="fa fa-gears fa-2x">
+						</i></a></li>
+						<li><a id="btn_edit" onclick="Yatay.Common.edit()" style="color:rgb(255,112,61);">
+							<i class="fa fa-edit fa-2x"></i>
+						</a></li>	
+						<li><a id="btn_bx_ready" onclick="Yatay.Common.bxReady()" style="color:rgb(100,200,255);">
+							<i class="fa fa-check fa-2x"></i>
+						</a></li>	
+						<li><a id="btn_lang" onclick="Yatay.Common.changeLanguage()" style="color:rgb(153,153,153);">
+							<i class="fa fa-exchange fa-2x"></i>
+						</a></li>							
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav">
+				<li><a id="btn_debug" onclick="Yatay.Common.debug()" style="color:rgb(230,255,102);display:none;">
+					<i class="fa fa-bug fa-2x"></i>
+				</a></li>	
+				<li><a id="btn_run" onclick="Yatay.Common.runTasks()" style="color:rgb(70,255,70);">
+					<i class="fa fa-play fa-2x"></i>
+				</a></li>
+				<li><a id="btn_stop" onclick="Yatay.Common.killTasks()" style="color:rgb(255,50,50);display:none;">
+					<i class="fa fa-stop fa-2x"></i>
+				</a></li>
+			</ul>
+			<ul class="nav navbar-nav">
+				<li class="dropdown pull-right">
+					<a id="btn_bxs_ready" class="dropdown-toggle" data-toggle="dropdown" style="color:rgb(100,200,255);display:none;">
+						<i class="fa fa-check-square-o fa-2x"></i>
+					</a>	
+					<ul id="bx_list" class="dropdown-menu pull-right">
+					</ul>
+				</li>	
+				<li><a id="btn_trash" onclick="Yatay.Common.openDeleteModal()" style="color:rgb(255,120,120);">
+					<i class="fa fa-eraser fa-2x"></i>
+				</a></li>			
+			</ul>			
+		</div>
+	</div>
+</div>

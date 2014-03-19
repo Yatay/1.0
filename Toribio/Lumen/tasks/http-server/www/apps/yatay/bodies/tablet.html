@@ -1,0 +1,42 @@
+<!-- Menu Navbar -->
+<div id="menu_navbar" class="navbar navbar-inverse navbar-fixed-top leftBar" >
+	<div class="navbar-inner">
+		<div class="container leftBar">	
+			<ul class="nav">
+				<li><a id="btn_load" onclick="Yatay.Common.openFileChooser()" style="color:rgb(255,70,70);">
+					<i class="fa fa-folder-open-o fa-3x"></i>
+				</a></li>	
+				<li><a id="btn_save" onclick="Yatay.Common.toXml()" style="color:rgb(70,70,255)">
+					<i class="fa fa-save fa-3x"></i>	
+				</a></li>
+				<li><a id="btn_robotest" onclick="Yatay.Common.robotest()" style="color:rgb(160,70,255);">
+					<i class="fa fa-gears fa-3x"></i>
+				</a></li>
+				<li><a id="btn_run" onclick="Yatay.Common.runTasks()" style="color:rgb(70,255,70);">
+					<i class="fa fa-play fa-3x"></i>
+				</a></li>
+				<li><a id="btn_edit" onclick="Yatay.Common.edit()" style="color:rgb(255,112,61);">
+					<i class="fa fa-edit fa-3x"></i>
+				</a></li>		
+				<li><a id="btn_debug" onclick="Yatay.Common.debug()" style="color:rgb(230,255,102); display: none;">
+					<i class="fa fa-bug fa-3x"></i>
+				</a></li>
+				<li><a id="btn_bx_ready" onclick="Yatay.Common.bxReady()" style="color:rgb(100,200,255);">
+					<i class="fa fa-check fa-3x"></i>
+				</a></li>
+				<li><a id="btn_stop" onclick="Yatay.Common.killTasks()" style="color:rgb(255,50,50); display: none;">
+					<i class="fa fa-stop fa-3x"></i>
+				</a></li>					
+				<li><a id="btn_lang" onclick="Yatay.Common.changeLanguage()" style="color:rgb(153,153,153);">
+					<i class="fa fa-exchange fa-3x"></i>
+				</a></li>		
+				<li><a id="btn_trash" onclick="Yatay.Common.openDeleteModal()" style="color:rgb(255,120,120);">
+					<i class="fa fa-eraser fa-3x"></i>
+				</a></li>
+				<li><a id="btn_back" onclick="Yatay.Common.goBack()" style="color:rgb(153,153,153); display: none;">
+					<i class="fa fa-arrow-left fa-3x"></i>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</div>	

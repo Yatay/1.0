@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<devices from="bobot" except="bb-butia, bb-ax, bb-admin, bb-hackp, bb-port, bb-pnp">
+	<device device_type="sensor" name="bb-distanc:1">
+		<function name="getValue" alias="medir distancia" params="0" ret="1" />
+	</device>
+	<device device_type="sensor" name="bb-grey:2">
+		<function name="getValue" alias="sensor de grises" params="0" ret="1" />
+	</device>
+	<device device_type="sensor" name="bb-button:1">
+		<function name="getValue" alias="boton" params="0" ret="1" />
+	</device>
+	<device device_type="sensor" name="bb-distanc:4">
+		<function name="getValue" alias="medir distancia" params="0" ret="1" />
+	</device>
+	<device device_type="actuator" name="bb-motors">
+		<function name="setvel2mtr" alias="mover adelante" params="4" ret="0" values="1,500,1,500" />
+		<function name="setvel2mtr" alias="mover atras" params="4" ret="0" values="0,500,0,500" />
+		<function name="setvel2mtr" alias="girar derecha" params="4" ret="0" values="1,500,0,500" />
+		<function name="setvel2mtr" alias="girar izquierda" params="4" ret="0" values="0,500,1,500" />	
+		<function name="setvel2mtr" alias="girar" params="4" ret="0" />
+	</device>
+	<!-- Generic definition must be at the end-->
+	<device device_type="generic">
+		<function name="getVersion" disabled="yes" />
+		<function name="getType" disabled="yes" />
+		<function name="testMotors" disabled="yes" />
+		<function name="dev" disabled="yes" />
+	</device>
+</devices>
+
