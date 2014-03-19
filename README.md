@@ -1,4 +1,12 @@
-1.0
+Yatay 1.0
 ===
 
-http://www.fing.edu.uy/~pgbutiablet/
+## Description
+
+This degree project aims to build an interactive development environment (IDE) based on TortuBots and Scratch for mobile devices,
+that allows students to code robotic behaviors for Butiá platform. For more information, go to: http://www.fing.edu.uy/~pgbutiablet/
+
+## User Guide (TODO)
+
+
+
