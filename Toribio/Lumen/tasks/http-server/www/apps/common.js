@@ -2,7 +2,7 @@
  * Blockly Apps: Common code
  *
  * Copyright 2013 Google Inc.
- * http://blockly.googlecode.com/
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,18 +31,19 @@ var BlocklyApps = {};
 BlocklyApps.LANGUAGE_NAME = {
   'af': 'Afrikaans',
   'ar': 'العربية',
-  'cs': 'Česky',
+  'az-latn': 'Azərbaycanca',
   'be-tarask': 'Taraškievica',
   'br': 'Brezhoneg',
   'ca': 'Català',
   'cdo': '閩東語',
+  'cs': 'Česky',
   'da': 'Dansk',
   'de': 'Deutsch',
   'el': 'Ελληνικά',
   'en': 'English',
   'es': 'Español',
   'eu': 'Euskara',
-  'fa': 'یسراف',
+  'fa': 'فارسی',
   'fi': 'Suomi',
   'fo': 'Føroyskt',
   'fr': 'Français',
@@ -52,6 +53,8 @@ BlocklyApps.LANGUAGE_NAME = {
   'he': 'עברית',
   'hu': 'Magyar',
   'ia': 'Interlingua',
+  'id': 'Bahasa Indonesia',
+  'is': 'Íslenska',
   'it': 'Italiano',
   'ja': '日本語',
   'ka': 'ქართული',
@@ -76,6 +79,7 @@ BlocklyApps.LANGUAGE_NAME = {
   'pms': 'Piemontèis',
   'ps': 'پښتو',
   'pt': 'Português',
+  'ro': 'Română',
   'pt-br': 'Português Brasileiro',
   'ru': 'Русский',
   'sk': 'Slovenčina',
@@ -86,8 +90,8 @@ BlocklyApps.LANGUAGE_NAME = {
   'tr': 'Türkçe',
   'uk': 'Українська',
   'vi': 'Tiếng Việt',
-  'zh-hans': '简体字',
-  'zh-hant': '中文',
+  'zh-hans': '簡體中文',
+  'zh-hant': '正體中文',
   'zh-tw': '國語'
 };
 
@@ -100,17 +104,53 @@ BlocklyApps.LANGUAGE_RTL = ['ar', 'fa', 'he', 'mzn', 'ps'];
  * Lookup for Blockly core block language pack.
  */
 BlocklyApps.LANGUAGE_PACK = {
-  'cdo': 'msg/js/zh_tw.js',
+  'ar': 'msg/js/ar.js',
+  'az': 'msg/js/az.js',
+  'ca': 'msg/js/ca.js',
+  'cdo': 'msg/js/zh_hant.js',
+  'cs': 'msg/js/cs.js',
+  'da': 'msg/js/da.js',
   'de': 'msg/js/de.js',
+  'el': 'msg/js/el.js',
+  'es': 'msg/js/es.js',
+  'fa': 'msg/js/fa.js',
+  'fr': 'msg/js/fr.js',
   'frr': 'msg/js/de.js',
+  'he': 'msg/js/he.js',
+  'hu': 'msg/js/hu.js',
+  'ia': 'msg/js/ia.js',
+  'id': 'msg/js/id.js',
+  'is': 'msg/js/is.js',
+  'it': 'msg/js/it.js',
+  'ja': 'msg/js/ja.js',
+  'ko': 'msg/js/ko.js',
   'ksh': 'msg/js/de.js',
   'lb': 'msg/js/de.js',
-  'pt': 'msg/js/pt_br.js',
-  'pt-br': 'msg/js/pt_br.js',
+  'ms': 'msg/js/ms.js',
+  'nl': 'msg/js/nl.js',
+  'no': 'msg/js/no.js',
+  'pl': 'msg/js/pl.js',
+  'pms': 'msg/js/pms.js',
+  'pt': 'msg/js/pt.js',
+  'pt-br': 'msg/js/pt-br.js',
+  // We used to use pt_br for pt-br (until November 2013).
+  // Users may still have URLs.
+  'pt_br': 'msg/js/pt-br.js',
+  'ro': 'msg/js/ro.js',
+  'ru': 'msg/js/ru.js',
+  'sq': 'msg/js/sq.js',
+  'sr': 'msg/js/sr.js',
+  'sv': 'msg/js/sv.js',
+  'th': 'msg/js/th.js',
+  'tl': 'msg/js/tl.js',
+  'tr': 'msg/js/tr.js',
+  'uk': 'msg/js/uk.js',
   'vi': 'msg/js/vi.js',
-  'zh-hans': 'msg/js/zh_tw.js',
-  'zh-hant': 'msg/js/zh_tw.js',
-  'zh-tw': 'msg/js/zh_tw.js',
+  'zh-hans': 'msg/js/zh-hans.js',
+  'zh-hant': 'msg/js/zh-hant.js',
+  // We used to use zh-tw for zh-hant (until November 2013).
+  // Users may still have URLs.
+  'zh-tw': 'msg/js/zh-hant.js',
   'default': 'msg/js/en.js'
 };
 
@@ -219,7 +259,7 @@ BlocklyApps.languagePack = function() {
  */
 BlocklyApps.init = function() {
   // Set the page title with the content of the H1 title.
-  // document.title = document.getElementById('title').textContent;
+  //document.title = document.getElementById('title').textContent;
 
   // Set the HTML's language and direction.
   // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
@@ -336,9 +376,13 @@ BlocklyApps.loadBlocks = function(defaultXml) {
  */
 // BlocklyApps.changeLanguage = function() {
   // // Store the blocks for the duration of the reload.
-  // var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  // var text = Blockly.Xml.domToText(xml);
-  // window.sessionStorage.loadOnceBlocks = text;
+  // // This should be skipped for the index page, which has no blocks and does
+  // // not load Blockly.
+  // if (typeof Blockly != 'undefined') {
+    // var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    // var text = Blockly.Xml.domToText(xml);
+    // window.sessionStorage.loadOnceBlocks = text;
+  // }
 
   // var languageMenu = document.getElementById('languageMenu');
   // var newLang = encodeURIComponent(
