@@ -52,7 +52,7 @@ button:active {
   border: 1px solid #888 !important;
 }
 button:hover {
-  box-shadow: 2px 2px 5px #888;
+//  box-shadow: 2px 2px 5px #888;
 }
 button.disabled:hover>img {
   opacity: 0.6;
