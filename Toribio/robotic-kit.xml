@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<devices from="bobot" except="bb-butia, bb-ax, bb-admin, bb-hackp, bb-port, bb-pnp">
+<devices from="xml" except="bb-butia, bb-ax, bb-admin, bb-hackp, bb-port, bb-pnp">
 	<device device_type="sensor" name="bb-distanc:1">
 		<function name="getValue" alias="medir distancia" params="0" ret="1" />
 	</device>

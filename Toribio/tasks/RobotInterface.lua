@@ -197,6 +197,11 @@ local function parse_xml(device_type, file, devs)
 				--Is this function available in bobot?
 				if (ret[i].available) then
 					ret[i].functions[j].available = (devices[devs[i].name][functions[j].name] ~= nil)
+					if (functions[j].disabled ~= nil) then
+						if (functions[j].disabled == 'yes') then
+							ret[i].functions[j].available = false
+						end
+					end
 				else 
 					ret[i].functions[j].available = false
 				end
@@ -205,8 +210,6 @@ local function parse_xml(device_type, file, devs)
 	end	
 	return ret
 end
-
-
 
 M.list_devices_functions = function(device_type)	
 	--Is there robotic-kit file?
