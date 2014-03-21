@@ -41,6 +41,20 @@ Blockly.Blocks['math_number'] = {
   }
 };
 
+Blockly.Blocks["math_divisible"] = {
+  init: function() {
+	this.setColour(225);
+    this.setOutput(true, 'Boolean');
+    this.appendValueInput('A')
+        .setCheck('Number');
+    this.appendValueInput('B')
+        .setCheck('Number').appendTitle("divisible entre");
+	this.setInputsInline(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+  }   
+}
+
 Blockly.Blocks['math_arithmetic'] = {
   // Basic arithmetic operator.
   init: function() {

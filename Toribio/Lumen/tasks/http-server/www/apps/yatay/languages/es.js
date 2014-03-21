@@ -38,6 +38,8 @@ Yatay.Msg.DIALOG_EDITION_ERROR_BTN = "Ver detalle";
 Yatay.Msg.DIALOG_EDITION_ERROR_MSG = "Algo esta mal en el código editado. Revísalo!";
 Yatay.Msg.DIALOG_NONBXS_BLOCKS_WARN = "Los bloques fuera del bloque principal no son tenidos en cuenta.";	
 Yatay.Msg.CANNOT_PARSE_BLOCKS = "Algunos bloques cargados no existen mas. No son comunes y no se pudieron recrear.";
+Yatay.Msg.NAME_NOT_TEXT = "No se puede comenzar el nombre con números!";
+Yatay.Msg.NAME_RESERVED = "Esa palabra esta reservada por Lua elige otra!"
 
 // File saver Messages
 Yatay.Msg.FILE_BLOCKS = "bloques";

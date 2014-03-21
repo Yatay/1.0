@@ -45,7 +45,7 @@ Yatay.init = function() {
 	var rtl = BlocklyApps.isRtl();
 	var toolbox = document.getElementById('toolbox');
 	Blockly.inject(document.getElementById('content_blocks'), {path: '../../', rtl: rtl, toolbox: toolbox, scrollbars: true});
-	Blockly.Lua.addReservedWords('code, timeouts, checkTimeout');
+	Blockly.Lua.addReservedWords('code,timeouts,checkTimeout,print,math');
 
 	var container = document.getElementById('content_area');
 	var onresize = function(e) {

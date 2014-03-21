@@ -43,9 +43,9 @@ Blockly.Blocks['variables_sensor_get'] = {
     return [this.getTitleValue('VAR')];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
-      this.setTitleValue(newName, 'VAR');
-    }
+	if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+	  this.setTitleValue(newName, 'VAR');
+	}
   },
   customContextMenu: function(options) {
     var option = {enabled: true};
@@ -141,9 +141,20 @@ Blockly.Blocks['variables_get'] = {
     return [this.getTitleValue('VAR')];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
-      this.setTitleValue(newName, 'VAR');
-    }
+	if (Blockly.Lua.RESERVED_WORDS_.split(",").indexOf(newName) != -1)
+	{
+		Yatay.Common.ShowMessage(Yatay.Msg.NAME_RESERVED);
+		newName = newName + "_1";	
+	}
+	else if (!isNaN(parseInt(newName)))
+	{
+		Yatay.Common.ShowMessage();
+		newName = "v_" + newName;	
+	}
+	if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+	  this.setTitleValue(newName, 'VAR');
+	}
+
   },
   customContextMenu: function(options) {
     var option = {enabled: true};
@@ -178,9 +189,20 @@ Blockly.Blocks['variables_set'] = {
     return [this.getTitleValue('VAR')];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
-      this.setTitleValue(newName, 'VAR');
-    }
+	if (Blockly.Lua.RESERVED_WORDS_.split(",").indexOf(newName) != -1)
+	{
+		Yatay.Common.ShowMessage(Yatay.Msg.NAME_RESERVED);
+		newName = newName + "_1";	
+	}
+	else if (!isNaN(parseInt(newName)))
+	{
+		Yatay.Common.ShowMessage(Yatay.Msg.NAME_NOT_TEXT);
+		newName = "v_" + newName;	
+	}
+	if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+	  this.setTitleValue(newName, 'VAR');
+	}
+
   },
   customContextMenu: Blockly.Blocks['variables_get'].customContextMenu
 };
