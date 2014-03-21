@@ -127,7 +127,14 @@ local function select_action(id, project, block, code, newborn, strUserId, block
 		local ret = pop_blocking_user(yataySensorResults, 'NewSensorResult', userId).."#;#"..yatayWebConsole
 		return ret
 	elseif (id == 'pollDebug') then
-		return pop_blocking_user(yatayDebugResults, 'NewDebugResult', userId)		 
+		if (yatayWebConsole == nil) then
+			yatayWebConsole = ""
+		end
+		if (yataySensorResults[userId] == nil) then
+			yataySensorResults[userId] = ""
+		end
+		local ret = yataySensorResults[userId].."#;#"..yatayWebConsole
+		return pop_blocking_user(yatayDebugResults, 'NewDebugResult', userId).."#;#"..ret	 
 	elseif (id == 'save') then
 		return saveTask(project, block, code, newborn, blockCount)
 	elseif (id == 'test') then

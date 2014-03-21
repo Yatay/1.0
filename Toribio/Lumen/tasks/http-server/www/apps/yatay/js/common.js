@@ -583,6 +583,8 @@ function pollResults() {
 								}
 								$("#result_console").html('<strong>' + msg_console + '</strong>' + console);
 							}
+							else
+								$("#result_console").html('');
 							var sensor = sensorHtml.split(' ')[0];
 							var value = sensorHtml.replace(sensor,'');
 							$("#result_sensor").html('<strong>' + Yatay.Msg.POPUP_RESULTS_ROBOTINFO + '</strong>' + sensor + value);
@@ -620,7 +622,22 @@ function debugPoll() {
 				data: {id:'pollDebug', name:'', code:'', userId: idUser},
 				success: function(html) {
 					if (html.length > 0) {
-						var behaviourName = html.split(':')[0];
+						splittedHtml = html.split('#;#');
+						//Show sensor and console results
+						var sensorHtml = splittedHtml[1];
+						var console = splittedHtml[2];
+						var sensor = sensorHtml.split(' ')[0];
+						var value = sensorHtml.replace(sensor,'');
+						if (!Yatay.Common.testMode) {
+								var msg_console = Yatay.Msg.POPUP_RESULTS_CONSOLE;
+								if (Yatay.Tablet != undefined) { 
+									msg_console = ' - ' + msg_console;
+								}
+								$("#result_console").html('<strong>' + msg_console + '</strong>' + console);
+						}
+						$("#result_sensor").html('<strong>' + Yatay.Msg.POPUP_RESULTS_ROBOTINFO + '</strong>' + sensor + value);
+						//Display executed block
+						var behaviourName = splittedHtml[0].split(':')[0];
 						var behavioursAfterThisOne = false;
 						var offset = 0;
 						for (var i = 0; i < Yatay.Common.behaviours.length; i++) {
@@ -629,10 +646,10 @@ function debugPoll() {
 								break;
 							}	
 						}
-						offset = Blockly.mainWorkspace.getTopBlocks()[0].id - parseInt(html.split(':')[1]);
-						var blockId = parseInt(html.split(':')[2]) + offset;
+						offset = Blockly.mainWorkspace.getTopBlocks()[0].id - parseInt(splittedHtml[0].split(':')[1]);
+						var blockId = parseInt(splittedHtml[0].split(':')[2]) + offset;
 						Yatay.DebugLastBlock = blockId;
-						Blockly.mainWorkspace.getBlockById(blockId).select()
+						setTimeout(function(){Blockly.mainWorkspace.getBlockById(blockId).select();}, 300);
 					}
 				},
 				error:function() {
@@ -775,7 +792,13 @@ Yatay.Common.robotest = function() {
 	    element.setAttribute('x', Blockly.RTL ? width - xy.x : xy.x);
 	    element.setAttribute('y', xy.y);
 	    xml.appendChild(element);
-
+		//Same as leaveOnlyBehavioursInWspace but without warn or filter by test
+		var topBlocks = Blockly.mainWorkspace.getTopBlocks();
+		for (var j=topBlocks.length-1 ; j>=0; j--)
+		{
+			if (topBlocks[j].type != "controls_behaviour" && topBlocks[j].type != "controls_conditionalBehaviour")
+				topBlocks[j].dispose();
+		}
 		try { 
 			Yatay.Common.bxReady();
 		} catch(e) {}
@@ -1047,7 +1070,7 @@ Yatay.Common.debug = function() {
 		Yatay.Common.sendTasks(codes[i]);
 	}
 
-	pollResults();
+//	pollResults();
 	debugPoll();
 	setTimeout(function() {	$('#btn_debug')[0].onclick = Yatay.Common.debug;} , 800);
 };

@@ -36,6 +36,18 @@ Blockly.Lua["math_number"] = function() {
   return window.parseFloat(this.getTitleValue('NUM')).toString().trim();
 };
 
+
+Blockly.Lua["math_divisible"] = function(opt_dropParens) {
+	var a = Blockly.Lua.statementToCode(this, 'A')  || '0' ;
+    var b = Blockly.Lua.statementToCode(this, 'B') || '0' ;
+	var code = "("+ a + " - math.floor("+a+"/"+b+")*"+b + ") == 0";
+	if (!opt_dropParens) {
+      code = '(' + code + ')';
+    }
+	return code
+};
+
+
 Blockly.Lua["math_arithmetic"] = function(opt_dropParens) {
   // Basic arithmetic operators, and power.
   var argument0 = Blockly.Lua.statementToCode(this, 'A')  || '0' ;
