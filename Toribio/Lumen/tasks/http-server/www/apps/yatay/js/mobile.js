@@ -27,7 +27,7 @@ $(document).ready(function() {
 	if (Yatay.Common.getCookie("idUser") == '') { 
 		Yatay.Common.requestUserId();
 	}
-	
+
 	Yatay.Mobile.initToolbox();
 	Yatay.Mobile.fixConflicts();
 
@@ -35,8 +35,41 @@ $(document).ready(function() {
 		Yatay.Mobile.initClasses();
 		$('#content_blocks').addClass('content-' + BlocklyApps.LANG);
 		Blockly.fireUiEvent(window, 'resize');
+		Blockly.fireUiEvent(window, 'resize');
 	}, 300);
 });
+
+/**
+ * Initialize and start the tour
+ */
+Yatay.Mobile.takeTour = function() {
+	$('.blocklyToolboxDiv').addClass('bootstro');
+	$('.blocklyToolboxDiv').attr('data-bootstro-step', '0');
+	$('.blocklyToolboxDiv').attr('data-bootstro-width', '600px');
+	$('.blocklyToolboxDiv').attr('data-bootstro-placement', 'right');
+	$('.blocklyToolboxDiv').attr('data-bootstro-title', Yatay.Msg.TOUR_TOOLBOX_TITLE);
+	$('.blocklyToolboxDiv').attr('data-bootstro-content', Yatay.Msg.TOUR_TOOLBOX_CONTENT);
+
+	$('#btn_run').addClass('bootstro');
+	$('#btn_run').attr('data-bootstro-step', '1');
+	$('#btn_run').attr('data-bootstro-width', '600px');
+	$('#btn_run').attr('data-bootstro-placement', 'bottom');
+	$('#btn_run').attr('data-bootstro-title', Yatay.Msg.TOUR_RUN_TITLE);
+	$('#btn_run').attr('data-bootstro-content', Yatay.Msg.TOUR_RUN_CONTENT);
+
+	$('#btn_more').addClass('bootstro');
+	$('#btn_more').attr('data-bootstro-step', '2');
+	$('#btn_more').attr('data-bootstro-width', '400px');
+	$('#btn_more').attr('data-bootstro-placement', 'bottom');
+	$('#btn_more').attr('data-bootstro-title', Yatay.Msg.TOUR_MORE_TITLE);
+	$('#btn_more').attr('data-bootstro-content', Yatay.Msg.TOUR_MORE_CONTENT);
+
+	bootstro.start('.bootstro', {
+		nextButton: '<button class="btn btn-primary btn-mini bootstro-next-btn">'+ Yatay.Msg.TOUR_NEXT +'</button>',
+		prevButton: '<button class="btn btn-primary btn-mini bootstro-prev-btn">'+ Yatay.Msg.TOUR_PREV +'</button>',
+		finishButton: '<button class="btn btn-success btn-mini bootstro-finish-btn">'+ Yatay.Msg.TOUR_QUIT +'</button>',
+	});
+};
 
 /**
  * Open (slide right) toolbox.

@@ -1,6 +1,6 @@
 html {
 	width: 100% !important;
-	height: 100 !important;
+	height: 100% !important;
 	clip: auto;
 	position: fixed;
 	overflow: hidden;
@@ -8,7 +8,7 @@ html {
 
 body {
 	width: 100% !important;
-	height: 100 !important;
+	height: 100% !important;
 	overflow: hidden !important;
 	background-color:#8FA9CC !important;
 }

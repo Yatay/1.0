@@ -755,6 +755,8 @@ Yatay.Common.projectSaver = function() {
 		$('#projmaneger_modal').modal('hide');
 		if (Yatay.Tablet != undefined) {
 			Yatay.Tablet.takeTour();
+		} else {
+			Yatay.Mobile.takeTour();
 		}
 	} else {
 		$('#projmaneger_modal').effect( "shake" );
@@ -769,19 +771,15 @@ Yatay.Common.robotest = function() {
 
 	var needsClean = true;
 	var isButiaBlockSelected = false;
-	if (Blockly.selected != null)
-	{
-		for (var j=0; j<Blockly.Toolbox.tree_.children_[2].blocks.length; j++)
-		{
-			if (Blockly.Toolbox.tree_.children_[2].blocks[j].attributes["type"].value == Blockly.selected.type)
-			{
+	if (Blockly.selected != null) {
+		for (var j=0; j<Blockly.Toolbox.tree_.children_[2].blocks.length; j++) {
+			if (Blockly.Toolbox.tree_.children_[2].blocks[j].attributes["type"].value == Blockly.selected.type) {
 				isButiaBlockSelected = true;
 				break;
 			}
 		}
 	}
-	if (isButiaBlockSelected)
-	{
+	if (isButiaBlockSelected) {
 		Yatay.Common.isButiaBlockSelected = true;
 		// if there's something selected and is in the butia pallete, then test it
 		needsClean = false;
@@ -794,8 +792,7 @@ Yatay.Common.robotest = function() {
 	    xml.appendChild(element);
 		//Same as leaveOnlyBehavioursInWspace but without warn or filter by test
 		var topBlocks = Blockly.mainWorkspace.getTopBlocks();
-		for (var j=topBlocks.length-1 ; j>=0; j--)
-		{
+		for (var j=topBlocks.length-1 ; j>=0; j--) {
 			if (topBlocks[j].type != "controls_behaviour" && topBlocks[j].type != "controls_conditionalBehaviour")
 				topBlocks[j].dispose();
 		}
@@ -815,11 +812,8 @@ Yatay.Common.robotest = function() {
 				Blockly.mainWorkspace.getTopBlocks()[0].moveBy(leftM - blockPos.x +15, topM - blockPos.y +15);
 				Blockly.mainWorkspace.getTopBlocks()[0].setDragging_(false);
 				Blockly.mainWorkspace.getTopBlocks()[0].select();
-			}, 100);
-		
-	}
-	else
-	{
+			}, 100);	
+	} else {
 		try {	
 			Yatay.Common.bxReady();
 		} catch(e) {}
@@ -844,12 +838,13 @@ Yatay.Common.robotest = function() {
 		if($('#btn_bxs_ready').is(":visible")) {			
 			$('#btn_bxs_ready').toggle('slow');
 		}
-		Yatay.Mobile.slideToolbox(false);
+		Yatay.Mobile.slideToolbox(false, true);
 	}
 	$('#btn_back').toggle();
 
-	if (isButiaBlockSelected)
+	if (isButiaBlockSelected) {
 		setTimeout(function() {$("#btn_run").click();} , 100);
+	}
 	setTimeout(function() {	$('#btn_robotest')[0].onclick = Yatay.Common.robotest;} , 800);
 	
 };

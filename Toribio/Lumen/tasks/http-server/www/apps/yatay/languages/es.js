@@ -56,8 +56,11 @@ Yatay.Msg.TOUR_EDIT_TITLE = '¿Qué código se está generando?';
 Yatay.Msg.TOUR_EDIT_CONTENT = 'Puedes editar y probar el código de tus comportamientos.';
 Yatay.Msg.TOUR_BXREADY_TITLE = '¿Terminaste de armar tu comportamiento?'; 
 Yatay.Msg.TOUR_BXREADY_CONTENT = 'Puedes marcar tu comportamiento como listo y seguir con otro!';
+Yatay.Msg.TOUR_MORE_TITLE = '¿Más funcionalidades?'; 
+Yatay.Msg.TOUR_MORE_CONTENT = 'Puedes calibrar el robot, editar código, cargar o guardar proyectos, marcar comportamientos como listos, entre otras cosas...';
 Yatay.Msg.TOUR_NEXT = 'siguiente';
 Yatay.Msg.TOUR_PREV = 'anterior';
+Yatay.Msg.TOUR_QUIT = 'salir';
 
 // Popup Messages 
 Yatay.Msg.POPUP_RESULTS_ROBOTINFO = 'Info. del Robot: ';

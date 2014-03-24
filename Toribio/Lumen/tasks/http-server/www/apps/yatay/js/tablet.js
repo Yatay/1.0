@@ -119,6 +119,28 @@ Yatay.Tablet.fixConflicts = function() {
 		return e
 	};
 	
+	
+	Blockly.Icon.prototype.iconClick_ = function(e) {
+		var nua = navigator.userAgent;
+		var is_android_browser = ((nua.indexOf('Mozilla/5.0') > -1 && (nua.indexOf('Mobile') > -1 || nua.indexOf('Android') > -1) && nua.indexOf('AppleWebKit') > -1) && !(nua.indexOf('Chrome') > -1));		
+		//Is running on Android Browser?
+		if (is_android_browser) {
+			if (Yatay.Tablet.onTime) {
+				if (this.block_.isEditable() && !this.block_.isInFlyout) {
+					this.setVisible(!this.isVisible());
+				}
+				Yatay.Tablet.onTime = false;
+				setTimeout(function() {
+					Yatay.Tablet.onTime = true;
+				}, 1200);				
+			}
+		} else {
+			if (this.block_.isEditable() && !this.block_.isInFlyout) {
+				this.setVisible(!this.isVisible());
+			}		
+		}
+	};
+	
 	//Fix: Long taps to open the toolbox on Android Browser.
 	Blockly.Toolbox.TreeControl.prototype.setSelectedItem = function(node) {
 		var nua = navigator.userAgent;

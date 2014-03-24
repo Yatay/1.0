@@ -56,8 +56,11 @@ Yatay.Msg.TOUR_EDIT_TITLE = 'What code is being generated?';
 Yatay.Msg.TOUR_EDIT_CONTENT = 'You can edit and test the generated code.';
 Yatay.Msg.TOUR_BXREADY_TITLE = 'Did you finish assembling your behavior?'; 
 Yatay.Msg.TOUR_BXREADY_CONTENT = 'You can check your behaviour as ready and start with another!';
+Yatay.Msg.TOUR_MORE_TITLE = 'There are more features?'; 
+Yatay.Msg.TOUR_MORE_CONTENT = 'You can calibrate, edit your code, load and save project, set your behaviours as ready, among others...';
 Yatay.Msg.TOUR_NEXT = 'next';
 Yatay.Msg.TOUR_PREV = 'prev';
+Yatay.Msg.TOUR_QUIT = 'quit';
 
 // Popup Messages 
 Yatay.Msg.POPUP_RESULTS_ROBOTINFO = 'Robot Info: ';
