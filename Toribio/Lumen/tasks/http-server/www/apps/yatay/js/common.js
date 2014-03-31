@@ -948,6 +948,10 @@ Yatay.Common.switchTabs = function(selected) {
  */
 Yatay.Common.closeEditor = function() {
 	Yatay.Common.editedBxs.active = -1;
+	setTimeout(function()
+	{
+		Blockly.fireUiEvent(window, 'resize');			
+	}, 900);
 };
 
 /**
@@ -1010,7 +1014,10 @@ Yatay.Common.runEditedTasks = function() {
 	if (Yatay.Common.editedBxs.active != -1) {
 		$('#code_modal').modal('hide');
 	}
-
+	setTimeout(function()
+	{
+		Blockly.fireUiEvent(window, 'resize');			
+	}, 900);
 	Yatay.Common.runTasks();
 };	
 
