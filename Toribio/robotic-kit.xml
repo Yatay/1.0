@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <devices from="xml" except="bb-butia, bb-ax, bb-admin, bb-hackp, bb-port, bb-pnp">
-	<device device_type="sensor" name="bb-distanc:1">
-		<function name="getValue" alias="medir distancia" params="0" ret="1" />
+	<device device_type="sensor" name="bb-distanc:2">
+		<function name="getValue" alias="medir dist." params="0" ret="1" />
 	</device>
-	<device device_type="sensor" name="bb-grey:2">
+	<device device_type="sensor" name="bb-grey:3">
 		<function name="getValue" alias="sensor de grises" params="0" ret="1" />
 	</device>
 	<device device_type="sensor" name="bb-button:1">

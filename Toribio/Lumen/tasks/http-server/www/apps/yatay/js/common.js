@@ -753,6 +753,10 @@ Yatay.Common.projectSaver = function() {
 	if (proj_name != null && proj_name.trim() != '') {
 		Yatay.Common.setCookie('project_name', proj_name.replace(/ /g, "_"), 1); 
 		$('#projmaneger_modal').modal('hide');
+		//Resize workspace 
+		Blockly.fireUiEvent(window, 'resize');
+		Blockly.fireUiEvent(window, 'resize');
+
 		if (Yatay.Tablet != undefined) {
 			Yatay.Tablet.takeTour();
 		} else {
