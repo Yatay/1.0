@@ -9,10 +9,12 @@ if (!Yatay.Msg){
 
 // Dialogs Messages
 Yatay.Msg.DIALOG_CODE_LABEL = "Código Generado";	
+Yatay.Msg.DIALOG_BUTIA_CHANGED = "El kit del robot Butiá ha cambiado.";	
 Yatay.Msg.DIALOG_RUN = "Probar";
 Yatay.Msg.DIALOG_SAVE = "Guardar";
 Yatay.Msg.DIALOG_LOADER_LABEL = "Elige un proyecto!";		
 Yatay.Msg.DIALOG_OPEN = "Abrir";
+Yatay.Msg.DIALOG_DELETEDBBEHAVIOURS = "Eliminar";
 Yatay.Msg.DIALOG_LOCAL_INPUT = "Local";
 Yatay.Msg.DIALOG_REMOTE_INPUT = "Servidor";
 Yatay.Msg.DIALOG_TXT_REMOTE_INPUT = "Datos almacenados: ";
@@ -39,7 +41,8 @@ Yatay.Msg.DIALOG_EDITION_ERROR_MSG = "Algo esta mal en el código editado. Reví
 Yatay.Msg.DIALOG_NONBXS_BLOCKS_WARN = "Los bloques fuera del bloque principal no son tenidos en cuenta.";	
 Yatay.Msg.CANNOT_PARSE_BLOCKS = "Algunos bloques cargados no existen mas. No son comunes y no se pudieron recrear.";
 Yatay.Msg.NAME_NOT_TEXT = "No se puede comenzar el nombre con números!";
-Yatay.Msg.NAME_RESERVED = "Esa palabra esta reservada por Lua elige otra!"
+Yatay.Msg.NAME_RESERVED = "Esa palabra esta reservada por Lua elige otra!";
+Yatay.Msg.DIALOG_DELETE_N = "¿Seguro quieres eliminar los comportamientos?";
 
 // File saver Messages
 Yatay.Msg.FILE_BLOCKS = "bloques";

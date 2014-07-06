@@ -152,6 +152,7 @@ Yatay.Common.loadDialogs = function() {
 	$('#btn_save2').html(Yatay.Msg.DIALOG_SAVE);
 	$('#btn_run2').html(Yatay.Msg.DIALOG_RUN);
 	$('#btn_openfile').html(Yatay.Msg.DIALOG_OPEN);
+	$('#btn_deleteDBBxs').html(Yatay.Msg.DIALOG_DELETEDBBEHAVIOURS);
 	$('#loader_label').html(Yatay.Msg.DIALOG_LOADER_LABEL);	
 	$('#txt_local_input').html(Yatay.Msg.DIALOG_LOCAL_INPUT);
 	$('#txt_remote_input').html(Yatay.Msg.DIALOG_REMOTE_INPUT);
@@ -363,7 +364,7 @@ Yatay.Common.saveTask = function(block, code) {
 /**
  * Load stored behaviours from server
  */
-Yatay.Common.loadBxs = function() {
+Yatay.Common.loadBxs = function(closeIfNoData) {
 	$('#remote_proj').html('');
 	$('#btn_remote_loader').attr('disabled', 'disabled').html(Yatay.Msg.DIALOG_LOADING);
 
@@ -376,6 +377,7 @@ Yatay.Common.loadBxs = function() {
 			$('#btn_remote_loader').hide();
 			var data = JSON.parse(content);
 			if (data.length > 0) {
+				$('#btn_deleteDBBxs').show();
 				$("#loadMainWindow").hide();
 				var multiselector = '<tr>' + '<th>' + Yatay.Msg.DIALOG_PROJECT + '</th>' +
 									'<th>' + Yatay.Msg.DIALOG_BEHAVIOURS + '</th>' + '</tr>';
@@ -403,6 +405,11 @@ Yatay.Common.loadBxs = function() {
 					}
 				}
 			} else {
+				if (closeIfNoData != null)
+				{
+					$('#loader_modal').modal('hide');      
+					return;
+				}
 				$('#btn_remote_loader').removeAttr('disabled').html(Yatay.Msg.DIALOG_REMOTE_LOADER);
 				$('#btn_remote_loader').hide();
 				$('#projects').remove();
@@ -482,6 +489,35 @@ Yatay.Common.fromXml = function() {
 };
 
 /**
+ * Deletes from database selected behaviours
+ */
+Yatay.Common.deleteDatabaseBxs = function(){
+	if (Yatay.Common.activesProj.length >0)
+	{
+		if (confirm(Yatay.Msg.DIALOG_DELETE_N))
+		{
+			var toDeleteList = new Array();
+			for (var i=0; i<Yatay.Common.activesProj.length; i++) {
+				var project = Yatay.Common.activesProj[i];
+				for (var j=0; j<Yatay.Common.activesBxs[project].length; j++) {
+					toDeleteList.push([project, Yatay.Common.activesBxs[project][j]]);
+				}
+			}		
+			$.ajax({
+				url: "/index.html",
+				type: "POST",
+				data: { id:'deleteBxs', /*Reusing block variable*/ block: JSON.stringify(toDeleteList)},
+				success: function(content) {
+					
+					Yatay.Common.loadBxs(true);
+				},
+				error:function() {}
+			});
+		}	
+	}
+}
+
+/**
  * Handle save click
  */
 Yatay.Common.toXml = function() {
@@ -531,6 +567,7 @@ Yatay.Common.readFile = function(evt) {
  */
 Yatay.Common.openFileChooser = function() {
 	$('#btn_load')[0].onclick = function(){return false;};
+	$('#btn_deleteDBBxs').hide();
 	$('#loader_modal').modal('show');
 	$('#btn_remote_loader').show();
 	$("#loadMainWindow").show();
@@ -675,8 +712,13 @@ Yatay.Common.refreshBlocksPoll = function() {
 			data: { id:'refreshBlocks' },
 			success: function(content) {
 				Yatay.Common.refresh = Yatay.Common.refresh || (content == 'yes');
-				//If isn't running, then refresh!
-				if (Yatay.Common.refresh && $('#btn_back').css('display') == 'none'){
+				//If needs to refresh and it's running, then first stop then refresh
+				if (Yatay.Common.refresh) {
+					if ($('#btn_back').css('display') != 'none')
+					{
+						Yatay.Common.ShowMessage(Yatay.Msg.DIALOG_BUTIA_CHANGED);
+						Yatay.Common.goBack();
+					}
 					Yatay.Common.refresh = false;
 					location.reload(true);					
 				}
@@ -753,6 +795,10 @@ Yatay.Common.projectSaver = function() {
 	if (proj_name != null && proj_name.trim() != '') {
 		Yatay.Common.setCookie('project_name', proj_name.replace(/ /g, "_"), 1); 
 		$('#projmaneger_modal').modal('hide');
+		//Resize workspace 
+		Blockly.fireUiEvent(window, 'resize');
+		Blockly.fireUiEvent(window, 'resize');
+
 		if (Yatay.Tablet != undefined) {
 			Yatay.Tablet.takeTour();
 		} else {
@@ -937,10 +983,6 @@ Yatay.Common.switchTabs = function(selected) {
 	
 	$('#tab' + behaviourId).addClass('active');
 	Yatay.Common.editedBxs.active = behaviourId;
-
-//	$('#code_modal').on('shown.bs.modal', function() {
-//		Yatay.Common.editor.refresh();
-//	});
 };
 
 /**
@@ -948,6 +990,10 @@ Yatay.Common.switchTabs = function(selected) {
  */
 Yatay.Common.closeEditor = function() {
 	Yatay.Common.editedBxs.active = -1;
+	setTimeout(function()
+	{
+		Blockly.fireUiEvent(window, 'resize');			
+	}, 900);
 };
 
 /**
@@ -1010,7 +1056,10 @@ Yatay.Common.runEditedTasks = function() {
 	if (Yatay.Common.editedBxs.active != -1) {
 		$('#code_modal').modal('hide');
 	}
-
+	setTimeout(function()
+	{
+		Blockly.fireUiEvent(window, 'resize');			
+	}, 900);
 	Yatay.Common.runTasks();
 };	
 

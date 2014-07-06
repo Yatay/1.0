@@ -82,9 +82,7 @@ Yatay.init = function() {
 		if (!disabled)
 		{
 			if (block.type == "controls_behaviour" || block.type == "controls_conditionalBehaviour")
-			{
-				disabled = Yatay.workspaceHasBehaviour();
-			}
+				disabled = Yatay.workspaceHasBehaviour();		
 		}
 		block.setDisabled(disabled);
 	  }
@@ -146,8 +144,7 @@ Yatay.init = function() {
 	Blockly.Block.prototype.render = function()
 	{	
 		this.renderYatay();
-		setTimeout(function()
-		{
+		setTimeout(function(){
 			Blockly.fireUiEvent(window, 'resize');			
 		}, 900);
 	}
@@ -156,14 +153,13 @@ Yatay.init = function() {
 	Blockly.FieldVariable.dropdownCreate = function() {
 	  var variableList = Blockly.Variables.allVariables();
 	  if (this.sourceBlock_ != null)
-	  {
-	  	  variableList = Yatay.getVariableOrSensorSurroundList(this.sourceBlock_);
-	  }
+	  	 variableList = Yatay.getVariableOrSensorSurroundList(this.sourceBlock_);
+	 
 	  // Ensure that the currently selected variable is an option.
 	  var name = this.getText();
-	  if (name && variableList.indexOf(name) == -1) {
+	  if (name && variableList.indexOf(name) == -1) 
 		variableList.push(name);
-	  }
+
 	  variableList.sort(goog.string.caseInsensitiveCompare);
 	  variableList.push(Blockly.Msg.RENAME_VARIABLE);
 	  variableList.push(Blockly.Msg.NEW_VARIABLE);
@@ -181,11 +177,11 @@ Yatay.init = function() {
 };
 
 
-if (window.location.pathname.match(/readonly.html$/)) {
+if (window.location.pathname.match(/readonly.html$/))
 	window.addEventListener('load', BlocklyApps.initReadonly);
-} else {
+else 
 	window.addEventListener('load', Yatay.init);
-}
+
 
 /**
  * Discard all blocks from the workspace.
