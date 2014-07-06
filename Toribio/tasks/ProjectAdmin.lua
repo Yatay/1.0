@@ -41,4 +41,10 @@ M.load_projs = function()
 	return json.encode(projs)
 end 
 
+
+M.delete_bxs = function(block)
+	local projectblocks = json.decode(block)
+	persistence.delete(projectblocks) 
+end 
+
 return M

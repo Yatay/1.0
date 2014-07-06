@@ -32,6 +32,18 @@ M.insert = function(project, block, code)
 	assert(insert_stmt:finalize() == sqlite3.OK)
 end
 
+M.delete = function(projectblocks)
+	local stmt = db:prepare[[ DELETE FROM Yatay WHERE project = :key AND block = :value ]]
+	for i=1, #projectblocks do
+		stmt:bind_names{  key = projectblocks[i][1],  value = projectblocks[i][2]}
+		assert(stmt:step() == sqlite3.DONE)		
+		if (i ~= #projectblocks) then 		
+			assert(stmt:reset())
+		end
+	end
+	assert(stmt:finalize() == sqlite3.OK)
+end
+
 M.get_behaviours = function(project)
 	local result = {}
 	bxs_stmt = assert(db:prepare('SELECT * FROM Yatay WHERE project = ?'))

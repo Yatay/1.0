@@ -149,6 +149,12 @@ local function select_action(id, project, block, code, newborn, strUserId, block
 		return refresh()
 	elseif (id == 'saveTempLocal') then
 		return saveTempLocal(code,project)		
+	elseif (id == 'deleteBxs') then
+		local pjadmin = require 'tasks/ProjectAdmin'    
+		local decoded_block = url_decode(url_decode(block))
+		print(decoded_block)  
+		--block contains [k,v] pairs of project, behaviours
+		pjadmin.delete_bxs(decoded_block)
 	elseif (id == 'getUserId') then
 		yatayUserId = yatayUserId + 1
 		userId = yatayUserId
