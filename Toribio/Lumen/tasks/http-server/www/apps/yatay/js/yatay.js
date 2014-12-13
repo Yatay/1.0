@@ -16,6 +16,12 @@ document.write('<script type="text/javascript" src="generated/' + BlocklyApps.LA
 Yatay = {}; 
 
 /**
+ * Robot velocity 
+ * @type {int}
+ */
+Yatay.vel = 500;
+
+/**
  * variables 
  * @type {Array}
  */

@@ -1,6 +1,6 @@
 local M = {}
 
-require 'LuaXml'
+require("LuaXML")
 local toribio = require 'toribio'
 local devices = toribio.devices
 local sched = require 'sched'
@@ -339,17 +339,18 @@ local function write_code(dev, func, first)
 			if (func.values == '') then
 				for i=1, tonumber(func.params) do
 					code = code .. '	var arg' .. i .. ' = Blockly.Lua.statementToCode(block, \'' .. tostring(i) .. '\') || \'0\'; \n'
-					if (params == '') then
-						params = '\" + arg' .. i .. ' + \"'
+					if (i ~= tonumber(func.params)) then
+						params = params .. 'arg' .. i .. ' + "," + ' 
 					else 
-						params = params .. ', \" + arg' .. i .. ' + \"'
+						params = params .. 'arg' .. i 
 					end			
 				end
 			else 
-				params = tostring(func.values)
+				params = '"' .. tostring(func.values) .. '"'				
 			end
-		end
-		code = code .. '	return debugTrace + \"robot.execute(\'' .. dev.name .. '\',\'' .. func.name .. '\',{' .. params .. '}, M.userId)\\n \"; \n' .. '}; \n\n'
+		end	
+		code = code .. '	var params = String(' .. params .. ').replace("Yatay.vel", String(Yatay.vel)); \n'		
+		code = code .. '	return debugTrace + \"robot.execute(\'' .. dev.name .. '\',\'' .. func.name .. '\',{" + params + "}, M.userId)\\n \"; \n' .. '}; \n\n'
 		file:write(code)
 		file:close()
 	end
