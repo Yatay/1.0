@@ -16,12 +16,6 @@ document.write('<script type="text/javascript" src="generated/' + BlocklyApps.LA
 Yatay = {}; 
 
 /**
- * Robot velocity 
- * @type {int}
- */
-Yatay.vel = 500;
-
-/**
  * variables 
  * @type {Array}
  */
@@ -177,7 +171,17 @@ Yatay.init = function() {
 	  }
 	  return options;
 	};
-	
+	//Initialize speeed
+	if (localStorage.yatay_speed == null)
+	{
+		localStorage.yatay_speed = 500;
+		Yatay.vel = 500;
+	}
+	else
+		Yatay.vel = localStorage.yatay_speed;
+		
+	$("#rngSpeed").val(Yatay.vel.toString());
+	$("#lblSpeed").text(Yatay.vel.toString());
 	// BlocklyApps.bindClick('trashButton', function() {Yatay.discard();});  	
 	setTimeout(function(){Blockly.mainWorkspace.render()},400);  
 };

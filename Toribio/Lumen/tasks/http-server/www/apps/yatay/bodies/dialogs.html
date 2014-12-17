@@ -82,3 +82,19 @@
 		<button id="btn_run2" class="btn btn-primary" onclick="Yatay.Common.closeEditionError();">Ok</button>
 	</div>
 </div>
+<!-- Edition error Modal -->
+<div id="speed_modal" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<h4 id="speed_title"/>
+	</div>
+	<div class="modal-body" style="min-height: 0px !important">
+		<label id="speed_msg" style="font-size:16px" />
+		<img src="/media/turtle.png" style="width: 10%; margin-top: 5px;">
+		<input id="rngSpeed" type="range" onchange="Yatay.Common.SpeedChange();" min="200" max="1000" style="margin-top: 5px;">
+		<img src="/media/rabbit.png" style="width: 10%;">
+		<label style="width:auto; margin-top: -1%;margin-left: 45.5%;" id="lblSpeed"></label>
+	</div>
+	<div class="modal-footer">
+		<button id="btn_run2" class="btn btn-primary" onclick="$('#speed_modal').modal('hide');">Ok</button>
+	</div>
+</div>

@@ -1,6 +1,6 @@
 local M = {}
 
-require("LuaXML")
+require 'LuaXml'
 local toribio = require 'toribio'
 local devices = toribio.devices
 local sched = require 'sched'
@@ -349,7 +349,7 @@ local function write_code(dev, func, first)
 				params = '"' .. tostring(func.values) .. '"'				
 			end
 		end	
-		code = code .. '	var params = String(' .. params .. ').replace("Yatay.vel", String(Yatay.vel)); \n'		
+		code = code .. '	var params = String(' .. params .. ').replace(/Yatay.vel/g, String(Yatay.vel)); \n'		
 		code = code .. '	return debugTrace + \"robot.execute(\'' .. dev.name .. '\',\'' .. func.name .. '\',{" + params + "}, M.userId)\\n \"; \n' .. '}; \n\n'
 		file:write(code)
 		file:close()

@@ -134,6 +134,19 @@ $(window).load(function() {
 
 		//Mystical fix for the blockly-bootstrap scrollbar conflict
 		try {$("foreignObject img").css("max-width","none");} catch(e) {}
+		
+		//Setting motors speed
+		//Initialize speeed
+		if (localStorage.yatay_speed == null)
+		{
+			localStorage.yatay_speed = 500;
+			Yatay.vel = 500;
+		}
+		else
+			Yatay.vel = localStorage.yatay_speed;
+			
+		$("#rngSpeed").val(Yatay.vel.toString());
+		$("#lblSpeed").text(Yatay.vel.toString());
 	}, 100);
 });
 
@@ -171,6 +184,8 @@ Yatay.Common.loadDialogs = function() {
 	$('#edition_error_title').html(Yatay.Msg.DIALOG_EDITION_ERROR_TITLE);
 	$('#btn_error_detail').html(Yatay.Msg.DIALOG_EDITION_ERROR_BTN);
 	$('#edition_error_msg').html(Yatay.Msg.DIALOG_EDITION_ERROR_MSG);
+	$('#speed_title').html(Yatay.Msg.DIALOG_SPEED_TITLE);
+	$('#speed_msg').html(Yatay.Msg.DIALOG_SPEED_MSG);
 };
 
 /**
@@ -587,6 +602,14 @@ Yatay.Common.closeEditionError = function() {
 	Yatay.Common.goBack();
 };
 
+Yatay.Common.SpeedChange = function(){
+	var speed = $("#rngSpeed").val();
+	Yatay.vel = parseInt(speed);
+	localStorage.yatay_speed = Yatay.vel;
+	$("#lblSpeed").text(speed);
+}
+
+
 /**
  * Long Poll for results
  */
@@ -878,6 +901,7 @@ Yatay.Common.robotest = function() {
 		$('#btn_save').toggle('slow');
 		$('#btn_bx_ready').toggle('slow');		
 		$('#btn_edit').toggle('slow');
+		$('#btn_speed').toggle('slow');
 		$('#btn_lang').toggle('slow');
 	} else {
 		$('#btn_more').toggle('slow');
@@ -1132,6 +1156,7 @@ Yatay.Common.goBack = function() {
 	}
 
 	if (Yatay.Common.testMode) {
+		$('#btn_speed').toggle('slow');
 		if (Yatay.Common.behaviours.length > 0) {
 			if (Yatay.Tablet != undefined) {
 				$("#behaviours_popup").show();
