@@ -13,10 +13,10 @@
 		<function name="getValue" alias="medir distancia" params="0" ret="1" />
 	</device>
 	<device device_type="actuator" name="bb-motors">
-		<function name="setvel2mtr" alias="mover adelante" params="4" ret="0" values="1,500,1,500" />
-		<function name="setvel2mtr" alias="mover atras" params="4" ret="0" values="0,500,0,500" />
-		<function name="setvel2mtr" alias="girar derecha" params="4" ret="0" values="1,500,0,500" />
-		<function name="setvel2mtr" alias="girar izquierda" params="4" ret="0" values="0,500,1,500" />	
+		<function name="setvel2mtr" alias="mover adelante" params="4" ret="0" values="1,Yatay.vel,1,Yatay.vel" />
+		<function name="setvel2mtr" alias="mover atras" params="4" ret="0" values="0,Yatay.vel,0,Yatay.vel" />
+		<function name="setvel2mtr" alias="girar derecha" params="4" ret="0" values="1,Yatay.vel,0,Yatay.vel" />
+		<function name="setvel2mtr" alias="girar izquierda" params="4" ret="0" values="0,Yatay.vel,1,Yatay.vel" />	
 		<function name="setvel2mtr" alias="detener" params="4" ret="0" values="0,0,0,0" />	
 		<function name="setvel2mtr" alias="girar" params="4" ret="0" />
 	</device>
