@@ -31,6 +31,7 @@
 	<!-- Yatay implementation libraries -->
 	<script type="text/javascript" src="js/yatay.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
+	<!--script type="text/javascript" src="js/webspeech.js"></script>-->
 	<script type="text/javascript">
 		Modernizr.load({
 			test: Modernizr.mq('only all and (max-device-width:480px)'),	
@@ -44,12 +45,14 @@
 			}, 1100);
 		});
 	</script>
+	
 </head>
 <body>
 	<!-- Main navbar menu (device dependent) -->
 	<div id="main_menu"></div> 
 	<!-- Dialogs (loaded from ./bodies) -->
 	<div id="dialogs"></div>
+	<div id="upper_toolbar"></div>	
 	<!-- Blockly starter -->
 	<script type="text/javascript">
 		$.ajax({

@@ -15,9 +15,10 @@ Yatay.Msg.DIALOG_SAVE = "Save";
 Yatay.Msg.DIALOG_LOADER_LABEL = "Project chooser!";		
 Yatay.Msg.DIALOG_OPEN = "Open";
 Yatay.Msg.DIALOG_DELETEDBBEHAVIOURS = "Delete";
-Yatay.Msg.DIALOG_LOCAL_INPUT = "Local";
-Yatay.Msg.DIALOG_REMOTE_INPUT = "Remote";
-Yatay.Msg.DIALOG_TXT_REMOTE_INPUT = "Stored data: ";
+Yatay.Msg.DIALOG_LOCAL_INPUT = "My Device";
+Yatay.Msg.DIALOG_REMOTE_INPUT = "Server";
+Yatay.Msg.DIALOG_TXT_REMOTE_INPUT = "Load from Yatay Server: ";
+Yatay.Msg.DIALOG_TXT_LOCAL_INPUT = "Load a file from my Device: ";
 Yatay.Msg.DIALOG_REMOTE_LOADER = "load";
 Yatay.Msg.DIALOG_LOADING = "loading...";
 Yatay.Msg.DIALOG_PROJECT = "Projects";
@@ -33,16 +34,21 @@ Yatay.Msg.DIALOG_NO_PROJS = "there is none.";
 Yatay.Msg.DIALOG_DELETE_ALL = "All";
 Yatay.Msg.DIALOG_DELETE_WORKSPACE = "Only workspace";
 Yatay.Msg.DIALOG_DELETE_LABEL = "What do you want to delete?";
+Yatay.Msg.DIALOG_DELETE_SIMPLE_MSG = "Sure you want to clean the board?";
 Yatay.Msg.DIALOG_MULTISELECT_NONE = "None selected";
 Yatay.Msg.DIALOG_MULTISELECT_ALL = " Select all";
 Yatay.Msg.DIALOG_EDITION_ERROR_TITLE = "Ooops!";
 Yatay.Msg.DIALOG_EDITION_ERROR_BTN = "View detail";
 Yatay.Msg.DIALOG_EDITION_ERROR_MSG = "Something is wrong with that code. Please check it."
+Yatay.Msg.DIALOG_SPEED_TITLE = "Settings";
+Yatay.Msg.DIALOG_SPEED_MSG = "Here you can set the motors speed.";
 Yatay.Msg.DIALOG_NONBXS_BLOCKS_WARN = "Blocks out of the main block are not taken into account.";	
 Yatay.Msg.CANNOT_PARSE_BLOCKS = "Some of the blocks loaded are not available now. The system could not made them up.";
 Yatay.Msg.NAME_NOT_TEXT = "The name first letter must not be a number!";
 Yatay.Msg.NAME_RESERVED = "That name is reserved by Lua, choose another one!";
 Yatay.Msg.DIALOG_DELETE_N = "Sure you want to delete these behaviours?";
+Yatay.Msg.DIALOG_CONFIG_TEXTBUTTONS = "Buttons with caption";
+Yatay.Msg.DIALOG_CONFIG_LANGUAGE = "Language";
 
 // File saver Messages
 Yatay.Msg.FILE_BLOCKS = "blocks";
@@ -144,3 +150,20 @@ Yatay.Msg.CODE_WHILE = "--The sleep prevents to flood the system with too many r
 
 // SVG Behaviours popup
 Yatay.Msg.SVG_BEHAVIOURS = '<svg width="128pt" height="32pt"><path fill="#5B8FA6" d=" M 17.37 7.50 C 20.56 7.07 23.79 7.34 27.00 7.30 C 62.28 7.31 97.57 7.32 132.85 7.30 C 133.23 15.87 132.89 24.45 133.03 33.03 C 103.00 33.00 72.98 32.98 42.96 33.03 C 38.77 32.67 36.46 38.03 32.17 37.03 C 29.90 36.01 28.04 34.28 25.80 33.20 C 20.97 32.72 16.10 33.29 11.26 32.82 C 11.35 27.21 11.26 21.59 11.29 15.98 C 10.94 12.15 13.94 8.74 17.37 7.50 Z" /></svg>';
+
+//Menu
+Yatay.Msg.MENU_LOAD_MSG = "Load";
+Yatay.Msg.MENU_SAVE_MSG = "Save";
+Yatay.Msg.MENU_TEST_MSG = "Test Robot";
+Yatay.Msg.MENU_RUN_MSG = "Run";
+Yatay.Msg.MENU_EDIT_MSG = "Edit Code";
+Yatay.Msg.MENU_DEBUG_MSG = "Debug";
+Yatay.Msg.MENU_READY_MSG = "Done";
+Yatay.Msg.MENU_STOP_MSG = "Stop";
+Yatay.Msg.MENU_DELETE_MSG = "Delete";
+Yatay.Msg.MENU_BACK_MSG = "Back";
+Yatay.Msg.MENU_CONFIG_MSG = "Settings";
+
+//Languages
+Yatay.Msg.LANG_ENGLISH = "English";
+Yatay.Msg.LANG_SPANISH = "Spanish";

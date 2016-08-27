@@ -3,38 +3,54 @@
 	<div class="navbar-inner">
 		<div class="container leftBar">	
 			<ul class="nav">
-				<li><a id="btn_load" onclick="Yatay.Common.openFileChooser()" style="color:rgb(255,70,70);">
+				<li><a id="btn_load" onclick="Yatay.Common.openFileChooser()" style="color:rgb(255,70,70);" class="txtNormalPadding">
 					<i class="fa fa-folder-open-o fa-3x"></i>
+					<br>
+					<label id="menu_load" class="menuLbl"/>
 				</a></li>	
-				<li><a id="btn_save" onclick="Yatay.Common.toXml()" style="color:rgb(70,70,255)">
+				<li><a id="btn_save" onclick="Yatay.Common.toXml()" style="color:rgb(70,70,255)" class="txtNormalPadding">
 					<i class="fa fa-save fa-3x"></i>	
+					<br>
+					<label id="menu_save" class="menuLbl"/>
 				</a></li>
-				<li><a id="btn_robotest" onclick="Yatay.Common.robotest()" style="color:rgb(160,70,255);">
-					<i class="fa fa-gears fa-3x"></i>
+				<li><a id="btn_robotest" onclick="Yatay.Common.robotest()" style="color:rgb(160,70,255);" class="txtNormalPadding">
+					<i class="fa fa-tachometer fa-3x"></i>
+					<br>
+					<label id="menu_test" class="menuLbl"/>
 				</a></li>
-				<li><a id="btn_run" onclick="Yatay.Common.runTasks()" style="color:rgb(70,255,70);">
+				<li><a id="btn_run" onclick="Yatay.Common.runTasks()" style="color:rgb(70,255,70);" class="txtNormalPadding">
 					<i class="fa fa-play fa-3x"></i>
+					<br>
+					<label id="menu_run" class="menuLbl"/>
 				</a></li>
-				<li><a id="btn_edit" onclick="Yatay.Common.edit()" style="color:rgb(255,112,61);">
+				<li><a id="btn_edit" onclick="Yatay.Common.edit()" style="color:rgb(255,112,61);" class="txtNormalPadding">
 					<i class="fa fa-edit fa-3x"></i>
+					<br>
+					<label id="menu_edit" class="menuLbl"/>
 				</a></li>		
-				<li><a id="btn_debug" onclick="Yatay.Common.debug()" style="color:rgb(230,255,102); display: none;">
+				<li><a id="btn_debug" onclick="Yatay.Common.debug()" style="color:rgb(230,255,102); display: none;" class="txtNormalPadding">
 					<i class="fa fa-bug fa-3x"></i>
+					<br>
+					<label id="menu_debug" class="menuLbl"/>
 				</a></li>
-				<li><a id="btn_bx_ready" onclick="Yatay.Common.bxReady()" style="color:rgb(100,200,255);">
-					<i class="fa fa-check fa-3x"></i>
-				</a></li>
-				<li><a id="btn_stop" onclick="Yatay.Common.killTasks()" style="color:rgb(255,50,50); display: none;">
+				<li><a id="btn_stop" onclick="Yatay.Common.killTasks()" style="color:rgb(255,50,50); display: none;" class="txtNormalPadding">
 					<i class="fa fa-stop fa-3x"></i>
+					<br>
+					<label id="menu_stop" class="menuLbl"/>
 				</a></li>					
-				<li><a id="btn_lang" onclick="Yatay.Common.changeLanguage()" style="color:rgb(153,153,153);">
+				<!--<li><a id="btn_lang" onclick="Yatay.Common.changeLanguage()" style="color:rgb(153,153,153);">
 					<i class="fa fa-exchange fa-3x"></i>
-				</a></li>		
-				<li><a id="btn_trash" onclick="Yatay.Common.openDeleteModal()" style="color:rgb(255,120,120);">
-					<i class="fa fa-eraser fa-3x"></i>
-				</a></li>
-				<li><a id="btn_back" onclick="Yatay.Common.goBack()" style="color:rgb(153,153,153); display: none;">
+					<label id="menuConfig" style="color: lightgray;font-size: 10px;font-family: cursive;"/>
+				</a></li>-->		
+				<li><a id="btn_back" onclick="Yatay.Common.goBack()" style="color:rgb(153,153,153); display: none;" class="txtNormalPadding">
 					<i class="fa fa-arrow-left fa-3x"></i>
+					<br>
+					<label id="menu_back" class="menuLbl"/>
+				</a></li>
+				<li><a id="btn_config" onclick="$('#speed_modal').modal('show');" style="color:deepskyblue;" class="txtNormalPadding">
+					<i class="fa fa-gears fa-3x"></i>
+					<br>
+					<label id="menu_config" class="menuLbl"/>
 				</a></li>
 			</ul>
 		</div>

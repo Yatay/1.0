@@ -22,6 +22,13 @@ Yatay.Tablet.onTime = true;
 $(document).ready(function() {	
 	$('#main_menu').load('./bodies/tablet.html', Yatay.Tablet.resizeIcons);
 	$('#dialogs').load('./bodies/dialogs.html', Yatay.Common.loadDialogs);
+	jQuery.fn.toggleYatay = function() {
+		var o = $(this[0]);
+		o.toggle("slow");
+	};
+
+	//Load upper toolbar
+	Yatay.Tablet.loadUpperToolbar();	
 	
 	var list = $('<ul class="nav" id="bx_list"></ul>');
 	list.appendTo($('#behaviours_popup'));
@@ -30,7 +37,8 @@ $(document).ready(function() {
 	if (Yatay.Common.getCookie("idUser") == '') { 
 		Yatay.Common.requestUserId();
 	}
-
+	$('#content_blocks').addClass('content-' + BlocklyApps.LANG);
+	$("#cmb_language").val(BlocklyApps.LANG);
 	Yatay.Tablet.fixConflicts();
 });
 
@@ -216,5 +224,23 @@ Yatay.Tablet.resizeIcons = function() {
 		$( "#btn_lang").children().addClass('fa-2x');
 		$( "#btn_trash").children().removeClass('fa-3x');
 		$( "#btn_trash").children().addClass('fa-2x');
+		$( "#btn_config").children().removeClass('fa-3x');
+		$( "#btn_config").children().addClass('fa-2x');
 	}
 };
+
+Yatay.Tablet.loadUpperToolbar = function(){
+	$("#upper_toolbar").html('<div class="innerUpperToolbar"><img onclick="Yatay.Common.collapseBlock()" src="/media/collapse.png" width="45px" id="collapseImg"><a id="btn_trash" onclick="Yatay.Common.openDeleteModal()" style="cursor:pointer; color:rgb(255,120,120);" class="txtNormalPadding"><i class="fa fa-eraser fa-2x" style="font-size: 2em;"></i></a><a id="btn_bx_ready" onclick="Yatay.Common.bxReady()" style="color:rgb(100,200,255);padding-right: 0px !important;cursor: pointer;" class="txtNormalPadding"><i class="fa fa-check fa-2x" style="font-size: 2.3em;padding-top: 2px;"></i></a></div>');
+}
+
+Yatay.showEditionCode = function(){
+	$('#code_modal').modal({backdrop:'static', keyboard:false });
+}
+
+Yatay.toggleEditionCode = function(){
+	$('#code_modal').modal('show');
+}
+
+Yatay.toggleFileChooser = function(){
+	$('#loader_modal').modal('show');
+}

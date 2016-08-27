@@ -32,7 +32,7 @@ codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
 };
 
 codepage.start = function(opt_data, opt_ignored, opt_ijData) {
-  return codepage.messages(null, null, opt_ijData) + '<script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="./languages/common.js"><\/script><script type="text/javascript" src="./languages/es.js"><\/script><table class="blocklyTable"><tr><td height="100%" colspan=2 id="content_area">' + codepage.toolbox(opt_data, null, opt_ijData) + '</td></tr></table><div id="content_blocks" class="content"></div>' + apps.dialog(null, null, opt_ijData) + apps.storageDialog(null, null, opt_ijData);
+  return codepage.messages(null, null, opt_ijData) + '<script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="./languages/common.js"><\/script><script type="text/javascript" src="./languages/es.js"><\/script><table class="blocklyTable"><tr><td height="90%" colspan=2 id="content_area">' + codepage.toolbox(opt_data, null, opt_ijData) + '</td></tr></table><div id="content_blocks" class="content"></div>' + apps.dialog(null, null, opt_ijData) + apps.storageDialog(null, null, opt_ijData);
 };
 
 codepage.toolbox = function(opt_data, opt_ignored, opt_ijData) {

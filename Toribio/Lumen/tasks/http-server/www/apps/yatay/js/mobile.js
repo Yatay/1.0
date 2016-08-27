@@ -11,17 +11,36 @@
 } 
 
 /**
- * Toolbox state  
+ * Dialog is being shown
  * @type {bool}
  */
-Yatay.Mobile.openToolbox = false;
+Yatay.Mobile.DisplayingDialog = false;
 
 /**
  * Initialize Yatay on ready
  */
 $(document).ready(function() {
+	$("#results_popup").css("zoom","3");
 	$('#main_menu').load('./bodies/mobile.html');
-	$('#dialogs').load('./bodies/dialogs.html', Yatay.Common.loadDialogs);
+	$('#dialogs').load('./bodies/mdialogs.html', Yatay.Common.loadDialogs);
+	$('.modal').removeClass("modal fade");
+	if (navigator.userAgent.indexOf("Firefox") != -1){  //Fixing mozilla showing letters godzilla-size in phones comparing chrome
+		$(".page").css("font-size","40%");
+		$(".mmod-body").css("font-size","250%");			
+	}
+	jQuery.fn.toggleYatay = function() {
+		var o = $(this[0]);
+		if (! o.is(":hidden"))
+			o.parent().parent()[0].style.setProperty("display","none", "important");
+		else
+			o.parent().parent()[0].style.setProperty("display","", "");
+		o.toggle("slow");		
+	};	
+	jQuery.fn.showYatay = function() {
+		var o = $(this[0]);
+		o.parent().parent()[0].style.setProperty("display","", "");
+		o.show("slow");		
+	};	
 	
 	//Yatay.Common.setCookie('idUser', '', 1);
 	if (Yatay.Common.getCookie("idUser") == '') { 
@@ -34,9 +53,17 @@ $(document).ready(function() {
 	setTimeout(function() {
 		Yatay.Mobile.initClasses();
 		$('#content_blocks').addClass('content-' + BlocklyApps.LANG);
+		Blockly._oldFireUiEvent = Blockly.fireUiEvent;
+		Blockly.fireUiEvent = function (a, b){
+			Blockly._oldFireUiEvent(a,b);
+			var left_marg = (Blockly.mainWorkspace.trashcan.left_ / 2);
+			var top_marg = (Blockly.mainWorkspace.trashcan.top_ /2.1);
+			Blockly.mainWorkspace.trashcan.svgGroup_.setAttribute("transform","translate("+left_marg+","+top_marg+")");
+		}
+		Blockly.mainWorkspace.trashcan.svgGroup_.classList.add("hidden");
 		Blockly.fireUiEvent(window, 'resize');
-		Blockly.fireUiEvent(window, 'resize');
-	}, 300);
+		Blockly.fireUiEvent(window, 'resize');		
+	}, 300);	
 });
 
 /**
@@ -77,13 +104,12 @@ Yatay.Mobile.takeTour = function() {
 Yatay.Mobile.slideToolbox = function(slide_in, resize) {
 	var ret = true;
 	if (slide_in) {
-		if (!Yatay.Mobile.openToolbox) {
+		if ($("#content_blocks").css("left") != "0px") { //When Toolbox hidden
 			if (Yatay.Common.testMode) { 
 				$('#content_blocks').removeClass('content-test');
 			} 
 			
 			$('#content_blocks').removeClass('content-' + BlocklyApps.LANG);
-			Yatay.Mobile.openToolbox = true;
 			ret = false;			
 		}
 	} else {
@@ -92,13 +118,12 @@ Yatay.Mobile.slideToolbox = function(slide_in, resize) {
 		} else {
 			$('#content_blocks').removeClass('content-test');
 			$('#content_blocks').addClass('content-' + BlocklyApps.LANG);
-		}
-		Yatay.Mobile.openToolbox = false;
+		}		
 	}
 	
 	if (resize) {
 		Blockly.fireUiEvent(window, 'resize');
-		Blockly.fireUiEvent(window, 'resize');
+		Blockly.fireUiEvent(window, 'resize');		
 	}
 	
 	return ret;
@@ -220,17 +245,18 @@ Yatay.Mobile.fixConflicts = function() {
  */
 Yatay.Mobile.initClasses = function() {
 	//Toolbox positions
+	var toolboxHiddenPart = parseInt($(".blocklyToolboxDiv").css("width")) *2 /3;
 	var esWidth = $('#content_blocks').css('width', '+=104px').css('width');	
 	var style = document.createElement('style');
-	style.type = 'text/css';
+	style.type = 'text/css';	
 	style.innerHTML = '.content-es { \n' +
-	'	left: -104px !important; \n' + 
+	'	left: -'+toolboxHiddenPart+'px !important; \n' + 
 	'	width: ' + esWidth + ' !important; \n' +
 	'} \n';
 	
 	var enWidth = $('#content_blocks').css('width', '-=22px').css('width');
 	style.innerHTML += '.content-en { \n' +
-	'	left: -82px !important; \n' + 
+	'	left: -'+toolboxHiddenPart+'px !important; \n' + 
 	'	width: ' + enWidth + ' !important; \n' +
 	'}\n';
 	
@@ -243,3 +269,191 @@ Yatay.Mobile.initClasses = function() {
 	document.getElementsByTagName('head')[0].appendChild(style);	
 };
 
+
+Yatay.toggleEditionCode = function(){
+	if (!$("#code_modal").is( ":hidden" ))
+	{
+		$(".tickDiv").toggle();
+		$(".collapseDiv").toggle();
+		if($('#btn_stop').is(":visible")) {
+			$('#btn_stop').toggleYatay();
+			Yatay.Common.killTasks()
+		}
+		$(".container").css("text-align","");
+		$("#code_modal").hide();
+		Yatay.Mobile.DisplayingDialog = false;
+		$('#content_blocks').addClass('content-' + BlocklyApps.LANG);
+		$("#content_blocks").show();
+		$(".blocklyTable").show();
+		Blockly.fireUiEvent = Yatay.BlocklyFireEventBlocked;
+		$('#btn_more').toggle();
+		$('#btn_bxs_ready').toggleYatay();
+		$('#btn_run').toggleYatay();
+		$('#btn_trash').toggleYatay();
+		$('#btn_back').toggleYatay();
+		Blockly.fireUiEvent(window, 'resize');
+		setTimeout(function(){$("#content_blocks").animate({left: '0px'}); Blockly.fireUiEvent(window, 'resize'); Blockly.fireUiEvent(window, 'resize'); },300);
+	}
+	else
+	{
+		$(".tickDiv").toggle();
+		$(".collapseDiv").toggle();
+		$(".container").css("text-align","left");
+		Yatay.Mobile.DisplayingDialog = true;
+		$('#content_blocks').removeClass('content-' + BlocklyApps.LANG);
+		$("#code_modal").show();
+		$(".blocklyTable").hide();
+		Yatay.BlocklyFireEventBlocked = Blockly.fireUiEvent;
+		Blockly.fireUiEvent = function (){ return;};
+		$('#btn_more').toggle();
+		if (!$('#btn_bxs_ready').is( ":hidden" ))
+			$('#btn_bxs_ready').toggleYatay();
+		$('#btn_run').toggleYatay();
+		$('#btn_trash').toggleYatay();
+		$('#btn_back').toggleYatay();
+		setTimeout(function(){$("#content_blocks").animate({left: '-1000%'}, 400, function(){
+			$("#content_blocks").hide();				
+		}); },200);
+	}
+}
+
+Yatay.toggleFileChooser = function(isGoBack){
+	if (!$("#loader_modal").is(":hidden")) //If it´s visible then, else..
+	{
+		$(".tickDiv").toggle();
+		$(".collapseDiv").toggle();
+		$(".container").css("text-align","");
+		$("#loader_modal").hide();
+		Yatay.Mobile.DisplayingDialog = false;
+		$('#content_blocks').addClass('content-' + BlocklyApps.LANG);
+		$("#content_blocks").show();
+		$(".blocklyTable").show();
+		$('#btn_openfile').removeClass("dobleButton pull-left");
+		$('#btn_openfile').addClass("singleButton");
+		Blockly.fireUiEvent = Yatay.BlocklyFireEventBlocked;
+		$('#btn_more').toggle();
+		if (Yatay.Common.behaviours.length > 0 && isGoBack)
+			$('#btn_bxs_ready').toggleYatay();
+		$('#btn_run').toggleYatay();
+		$('#btn_trash').toggleYatay();
+		$('#btn_back').toggleYatay();
+		Blockly.fireUiEvent(window, 'resize');
+		setTimeout(function(){$("#content_blocks").animate({left: '0px'}); Blockly.fireUiEvent(window, 'resize'); Blockly.fireUiEvent(window, 'resize'); },300);
+	}
+	else
+	{
+		$(".tickDiv").toggle();
+		$(".collapseDiv").toggle();
+		$(".container").css("text-align","left");
+		Yatay.Mobile.DisplayingDialog = true;
+		$('#content_blocks').removeClass('content-' + BlocklyApps.LANG);
+		$("#loader_modal").show();
+		$(".blocklyTable").hide();
+		Yatay.BlocklyFireEventBlocked = Blockly.fireUiEvent;
+		Blockly.fireUiEvent = function (){ return;};
+		$('#btn_more').toggle();
+		if (!$('#btn_bxs_ready').is( ":hidden" ))
+			$('#btn_bxs_ready').toggleYatay();
+		$('#btn_run').toggleYatay();
+		$('#btn_trash').toggleYatay();
+		$('#btn_back').toggleYatay();
+		setTimeout(function(){$("#content_blocks").animate({left: '-1000%'}, 400, function(){
+			$("#content_blocks").hide();				
+		}); },200);
+	}
+}
+
+Yatay.Mobile.settings  = function(){
+	var modalVisible = !$("#settings_modal").is(":hidden");
+	if (modalVisible) //If it´s visible then, else..
+	{
+		if ($("#cmb_language").val() != localStorage.yatay_lang)
+			Yatay.Common.changeLanguage();	
+		$(".tickDiv").toggle();
+		$(".collapseDiv").toggle();
+		$(".container").css("text-align","");
+		$("#settings_modal").hide();
+		Yatay.Mobile.DisplayingDialog = false;
+		$('#content_blocks').addClass('content-' + BlocklyApps.LANG);
+		$("#content_blocks").show();
+		$(".blocklyTable").show();
+		$('#btn_openfile').removeClass("dobleButton pull-left");
+		$('#btn_openfile').addClass("singleButton");
+		Blockly.fireUiEvent = Yatay.BlocklyFireEventBlocked;
+		$('#btn_more').toggle();
+		if (Yatay.Common.behaviours.length > 0)
+			$('#btn_bxs_ready').toggleYatay();
+		$('#btn_run').toggleYatay();
+		$('#btn_trash').toggleYatay();
+		$('#btn_back').toggleYatay();
+		Blockly.fireUiEvent(window, 'resize');
+		setTimeout(function(){$("#content_blocks").animate({left: '0px'}); Blockly.fireUiEvent(window, 'resize'); Blockly.fireUiEvent(window, 'resize'); },300);
+	}
+	else
+	{
+		localStorage.yatay_lang = BlocklyApps.LANG;
+		$("#cmb_language").val(BlocklyApps.LANG);
+		$(".tickDiv").toggle();
+		$(".collapseDiv").toggle();
+		$(".container").css("text-align","left");
+		Yatay.Mobile.DisplayingDialog = true;
+		$('#content_blocks').removeClass('content-' + BlocklyApps.LANG);
+		$("#settings_modal").show();
+		$(".blocklyTable").hide();
+		Yatay.BlocklyFireEventBlocked = Blockly.fireUiEvent;
+		Blockly.fireUiEvent = function (){ return;};
+		$('#btn_more').toggle();
+		if (!$('#btn_bxs_ready').is( ":hidden" ))
+			$('#btn_bxs_ready').toggleYatay();
+		$('#btn_run').toggleYatay();
+		$('#btn_trash').toggleYatay();
+		$('#btn_back').toggleYatay();
+		setTimeout(function(){$("#content_blocks").animate({left: '-1000%'}, 400, function(){
+			$("#content_blocks").hide();				
+		}); },200);
+	}
+}
+
+Yatay.Mobile.proymodal  = function(){
+	if (!$(projmaneger_modal).is(":hidden")) //If it´s visible then, else..
+	{
+		$(".tickDiv").toggle();
+		$(".collapseDiv").toggle();
+		$(".container").css("text-align","");
+		$("#projmaneger_modal").hide();
+		Yatay.Mobile.DisplayingDialog = false;
+		$('#content_blocks').addClass('content-' + BlocklyApps.LANG);
+		$("#content_blocks").show();
+		$(".blocklyTable").show();
+		$('#btn_openfile').removeClass("dobleButton pull-left");
+		$('#btn_openfile').addClass("singleButton");
+		Blockly.fireUiEvent = Yatay.BlocklyFireEventBlocked;
+		$('#btn_more').toggle();
+		if (Yatay.Common.behaviours.length > 0)
+			$('#btn_bxs_ready').toggleYatay();
+		$('#btn_run').toggleYatay();
+		$('#btn_trash').toggleYatay();
+		Blockly.fireUiEvent(window, 'resize');
+		setTimeout(function(){$("#content_blocks").animate({left: '0px'}); Blockly.fireUiEvent(window, 'resize'); Blockly.fireUiEvent(window, 'resize'); },300);
+	}
+	else
+	{
+		$(".tickDiv").toggle();
+		$(".collapseDiv").toggle();
+		$(".container").css("text-align","left");
+		Yatay.Mobile.DisplayingDialog = true;
+		$('#content_blocks').removeClass('content-' + BlocklyApps.LANG);
+		$("#projmaneger_modal").show();
+		$(".blocklyTable").hide();
+		Yatay.BlocklyFireEventBlocked = Blockly.fireUiEvent;
+		Blockly.fireUiEvent = function (){ return;};
+		$('#btn_more').toggle();
+		if (!$('#btn_bxs_ready').is( ":hidden" ))
+			$('#btn_bxs_ready').toggleYatay();
+		$('#btn_run').toggleYatay();
+		$('#btn_trash').toggleYatay();
+		setTimeout(function(){$("#content_blocks").animate({left: '-1000%'}, 400, function(){
+			$("#content_blocks").hide();				
+		}); },200);
+	}
+}

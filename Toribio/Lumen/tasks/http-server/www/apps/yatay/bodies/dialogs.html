@@ -11,7 +11,7 @@
 	</div>
 	<div class="modal-footer">
 		<button id="btn_save2" class="btn btn-primary pull-left" onclick="Yatay.Common.saveEditedCode()" />
-		<button id="btn_run2" class="btn btn-primary" onclick="Yatay.Common.runEditedTasks()"/>
+		<button id="btn_run2" class="btn btn-success" onclick="Yatay.Common.runEditedTasks()"/>
 	</div>
 </div>
 <!-- File loader Modal -->
@@ -80,5 +80,34 @@
 	</div>
 	<div class="modal-footer">
 		<button id="btn_run2" class="btn btn-primary" onclick="Yatay.Common.closeEditionError();">Ok</button>
+	</div>
+</div>
+<!-- Edition error Modal -->
+<div id="speed_modal" class="modal hide fade" tabindex="-1" role="dialog">
+	<div class="modal-header">
+		<h4 id="speed_title"/>
+	</div>
+	<div class="modal-body" style="min-height: 0px !important">
+		<label id="speed_msg" style="font-size:16px" />
+		<img src="/media/turtle.png" style="width: 10%; margin-top: 5px;">
+		<input id="rngSpeed" type="range" onchange="Yatay.Common.SpeedChange();" min="200" max="1000" style="margin-top: 5px;">
+		<img src="/media/rabbit.png" style="width: 10%;">
+		<label style="width:auto; margin-top: -1%;margin-left: 45.5%;" id="lblSpeed"></label>
+		<hr>
+		<div class="checkbox">
+			<label>
+				<input id="chk_txtbuttons"type="checkbox"> <div onclick="Yatay.Common.toggleCheckbox('chk_txtbuttons')"><label id="lbl_txtbuttons"></label></div>
+			</label>
+		</div>
+		<hr>
+		<label id ="lbl_language" style="width:auto;float:left; margin-right:5px"></label>
+		<select style="float:left" id="cmb_language" class="form-control">
+		  
+		</select>
+		<br><br>
+		<div>
+	</div>
+	<div class="modal-footer">
+		<button id="btn_run2" class="btn btn-primary" onclick="Yatay.Common.SettingsChange();">Ok</button>
 	</div>
 </div>

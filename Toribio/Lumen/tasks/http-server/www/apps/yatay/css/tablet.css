@@ -1,3 +1,6 @@
+body{
+	background-color:#8FA9CC !important;
+}
 textarea { 
 	width: 200px; 
 	min-width:200px; 
@@ -29,6 +32,8 @@ textarea {
 
 .navbar .nav > li {
     cursor: pointer;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 .navbar .brand {
@@ -109,9 +114,46 @@ textarea {
 #content_blocks {
   padding: 0;
   left: 11% !important;
+  top: 2.5% !important;
 }
 
 .blocklyTable {
 	width:86% !important;
-	height:100% !important;
+	height:97% !important;
 }
+.menuLbl{
+	display:none;
+}
+
+.innerUpperToolbar{
+	left: 43.5%;	
+	position: relative;
+	background-color: #d9edf7;
+	width: 16%;
+	z-index: 4;
+	border-radius: 10px;
+	top: 2px;
+	text-align: center;
+	border: 1px solid aquamarine;
+	height: 43px;
+}
+
+#collapseImg{
+  margin-left: auto;
+  cursor: pointer;
+  padding: 2px 5px 6px 0px;
+}
+
+.blocklyTreeRow{
+	height: 35px;
+}
+
+.blocklyToolboxDiv{
+	border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.blocklySvg{
+	border-radius: 15px;
+}
+
